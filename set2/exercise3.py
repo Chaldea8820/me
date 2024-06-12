@@ -18,7 +18,7 @@ def is_odd(a_number):
 
     So if a_number modulo two is zero, then it's even.
     """
-    return %2 == 0 then False
+    return a_number % 2 == 1 
 
 
 def fix_it(moves=True, should_move=True):
@@ -36,7 +36,12 @@ def fix_it(moves=True, should_move=True):
     Most people write this function with 4 return statements.
     As an extra challenge, see if you can get that down to three.
     """
-    return if 
+    if moves and not should_move:
+        return "Duct Tape"
+    elif not moves and should_move:
+        return "WD-40"
+    else:
+        return "No Problem"
 
 
 def loops_preview():
@@ -76,8 +81,8 @@ def loops_1c(number_of_items=5, symbol="#"):
     or the symbol, let it be whatever it wants to be.
     """
     c1_list = []
-    for i in range(5):
-        c1_list.append("#")
+    for i in range(number_of_items):
+        c1_list.append(symbol)
     return c1_list
 
 
@@ -90,8 +95,7 @@ def loops_2_preview():
             ['💩', '💩', '💩', '💩'],
             ['💩', '💩', '💩', '💩'],
             ['💩', '💩', '💩', '💩'],
-            ['💩', '💩', '💩', '💩'],
-          ]
+            ['💩', '💩', '💩', '💩'],]
     """
     field = []
     for i in range(4):
@@ -120,14 +124,13 @@ def loops_2():
             ['*', '*', '*', '*', '*', '*', '*', '*', '*', '*'],
           ]
     """
-    field = []
+    star_field = []
     for i in range(10):
         row = []
         for j in range(10):
             row.append("*")
-        field.append(row)
-    return field
-
+        star_field.append(row)
+    return star_field
 
 def loops_3():
     """Make a rising block of numbers.
@@ -148,16 +151,18 @@ def loops_3():
     remember that range(10) produces a list of numbers from 0...9
     So for every step produced by `for i in range(10):` i is a different number
     TIP: notice that this needs to to return strings of numbers,
-         so call str(number) to cast.
+    so call str(number) to cast.
     """
-    field = []
+    num_field = []
     for i in range(10):
         row = []
         for j in range(10):
-            row.append("*")
-        field.append(row)
-    return field
+            row.append(str(i))
+        num_field.append(row)
+    return num_field
 
+# num_field = []
+# for i in range(10)
 
 def loops_4():
     """Make a block of numbers that rises left to right.
@@ -176,7 +181,14 @@ def loops_4():
       ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
     ]
     """
-    return None
+    num_field_2 = []
+    for i in range(10):
+        row = []
+        for j in range(10):
+            row.append(str(j))
+        num_field_2.append(row)  
+    return num_field_2
+
 
 
 def loops_5():
@@ -206,7 +218,13 @@ def loops_5():
         f"There are {num_bottles} green bottles"
     you'll come to see the pros and cons of each over time.
     """
-    return None
+    num_field_3 = []
+    for i in range(10): 
+        row = []
+        for j in range(5): 
+            row.append(f"(i{i}, j{j})") 
+        num_field_3.append(row)  
+    return num_field_3
 
 
 def loops_6():
@@ -229,7 +247,13 @@ def loops_6():
     You can use a variable.
     TIP: look out for the starting condition.
     """
-    return None
+    wedgy = []
+    for i in range(10):
+        row = []
+        for j in range(i+1):
+            row.append(str(j))
+        wedgy.append(row)  
+    return wedgy 
 
 
 def loops_7():
@@ -253,7 +277,13 @@ def loops_7():
     This is a hard problem. Use lots of experimentation and draw
     lots of diagrams!
     """
-    return None
+    pyr = []
+    for i in range(5):
+        row = []
+        for j in range(9):
+            row.append(j)
+        pyr.append(row)  
+    return pyr 
 
 
 if __name__ == "__main__":
