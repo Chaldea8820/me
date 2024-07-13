@@ -281,10 +281,14 @@ def loops_7():
     for i in range(5):
         row = []
         for j in range(9):
-            row.append(j)
-        pyr.append(row)  
-    return pyr 
-
+            distance = abs(j - 5)
+            if distance <= i - 1:
+                row.append("*")
+            else:
+                row.append(" ")
+        pyr.append(row)
+    return pyr
+    
 
 if __name__ == "__main__":
     # this section does a quick test on your results and prints them nicely.

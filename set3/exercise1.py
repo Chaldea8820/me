@@ -17,7 +17,13 @@ def loop_ranger(start, stop=None, step=1):
     Look up for how range() works in the python docs. You could  answer this
     with just the range function, but we'd like you to do it the long way.
     """
-    return None
+    list_1 = []
+    for i in range (start, stop,step)
+        list_1.append(i)
+        return list_1
+
+
+
 
 
 def two_step_ranger(start, stop):
@@ -28,7 +34,10 @@ def two_step_ranger(start, stop):
 
     You can either reuse loop_ranger, or the range function that in the standard library
     """
-    return None
+    list_2 = []
+    for i in range (start, stop, 2)
+        list_2.append(i)
+        return list_2
 
 
 def stubborn_asker(low, high):
@@ -39,7 +48,14 @@ def stubborn_asker(low, high):
 
     Look up the docs for a function called "input"
     """
-    return None
+    message = "give me a number between {low} and {high}" .format(low,high)
+    print(message)
+
+    input_num = input(message)
+    if (low < input_num < high)
+    print("{} Passes".format(input)) 
+    else:
+    print("{input} Fails" .format(low, high))
 
 
 def not_number_rejector(message):
@@ -49,16 +65,34 @@ def not_number_rejector(message):
     (e.g. "cow", "six", "8!") then throw it out and ask for an actual number.
     When you do get a number, return it.
     """
-    return None
+    message = "Give me a number: "
+    print(message)
+    
+    while True:
+        try:
+            input_num = int(input(message))
+            print("{} Passes".format(input_num))
+            return input_num
+        
+        except Exception as e:
+            print("Number fuckwit")  
 
 
 def super_asker(low, high):
-    """Robust asking function.
-
-    Combine what you learnt from stubborn_asker and not_number_rejector
-    to make a function that does it all!
-    """
-    return None
+    message = "number between {} and {}: ".format(low, high)
+    
+    while True:
+        try:
+            input_num = int(input) 
+            
+            if low < input_num < high:
+                print("{} Passes".format(input_num))
+                return input_num 
+            else:
+                print("{} Fails".format(input_num, low, high))
+        
+        except Exception as e:
+            print("Number fuckwit.")
 
 
 if __name__ == "__main__":

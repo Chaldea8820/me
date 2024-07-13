@@ -37,10 +37,14 @@ def get_some_details():
          dictionary, you'll need integer indeces for lists, and named keys for
          dictionaries.
     """
-    json_data = open(LOCAL + "/lazyduck.json").read()
 
-    data = json.loads(json_data)
-    return {"lastName": None, "password": None, "postcodePlusID": None}
+    with open("set4\lazyduck.json", "r", encoding="utf-8") as file:
+        data = json.load(file)
+    return {"lastName": data['results'][0]['name']['last'], "password": data['results'][0]['login']['password'], "postcodePlusID": data['results'][0]['location']['street']}
+   
+
+
+
 
 
 def wordy_pyramid():
@@ -78,8 +82,22 @@ def wordy_pyramid():
     TIP: to add an argument to a URL, use: ?argName=argVal e.g. &wordlength=
     """
     pyramid = []
+    url = f"https://us-central1-waldenpondpress.cloudfunctions.net/give_me_a_word?wordlength=20"
+    r = requests.get(url)
+    if r.status_code is 200:
+        pyramid_file = json.loads(r.text)
 
-    return pyramid
+for length in range(3, max_length + 1, 2):
+        word = get_word_of_length(length)
+        if word:
+            pyramid.append(word[:length])
+            max_length = 20
+
+        return pyramid
+
+
+
+
 
 
 def pokedex(low=1, high=5):
@@ -104,6 +122,20 @@ def pokedex(low=1, high=5):
 
     return {"name": None, "weight": None, "height": None}
 
+for id in range(low, high + 1):
+
+name = pokemon_data["name"]
+        weight = pokemon_data["weight"]
+            height = pokemon_data["height"]
+            if height > tallest_height:
+                tallest_height = height
+                tallest_pokemon = {
+                    "name": name,
+                    "weight": weight,
+                    "height": height
+                    }
+
+    return tallest_pokemon
 
 def diarist():
     """Read gcode and find facts about it.
