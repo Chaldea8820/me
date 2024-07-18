@@ -281,8 +281,8 @@ def loops_7():
     for i in range(5):
         row = []
         for j in range(9):
-            distance = abs(j - 5)
-            if distance <= i - 1:
+            distance = abs(j - 4) 
+            if distance <= i:
                 row.append("*")
             else:
                 row.append(" ")

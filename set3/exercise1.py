@@ -48,15 +48,18 @@ def stubborn_asker(low, high):
 
     Look up the docs for a function called "input"
     """
-    message = "give me a number between {low} and {high}" .format(low,high)
-    print(message)
-
-    input_num = input(message)
-    if (low < input_num < high)
-    print("{} Passes".format(input)) 
-    else:
-    print("{input} Fails" .format(low, high))
-
+    message = f"Give me a number between {low} and {high}: "
+    
+    while True:
+        try:
+            input_num = int(input(message))
+            if low < input_num < high:
+                print(f"{input_num} Passes")
+                return input_num
+            else:
+                print(f"{input_num} Fails")
+                except ValueError:
+            print("number dumbass")
 
 def not_number_rejector(message):
     """Ask for a number repeatedly until actually given one.

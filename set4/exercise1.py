@@ -16,7 +16,7 @@ if LOCAL != CWD:
     Be careful that your relative paths are
     relative to where you think they are
     LOCAL: {LOCAL}
-    CWD: "CWD
+    CWD: {CWD}
     """
     )
 
@@ -38,12 +38,13 @@ def get_some_details():
          dictionaries.
     """
 
-    with open("set4\lazyduck.json", "r", encoding="utf-8") as file:
+    with open(f"{LOCAL}\lazyduck.json", "r", encoding="utf-8") as file:
         data = json.load(file)
-    return {"lastName": data['results'][0]['name']['last'], "password": data['results'][0]['login']['password'], "postcodePlusID": data['results'][0]['location']['street']}
-   
-
-
+        last_name = data['results'][0]['name']['last']
+        password = data['results'][0]['login']['password']
+        postcode = int(data['results'][0]['location']['postcode'])
+        ID = int(data ['results'][0]['id']['value'])
+    return {"lastName": last_name, "password": password, "postcodePlusID": postcode + ID}
 
 
 
@@ -81,22 +82,20 @@ def wordy_pyramid():
     ]
     TIP: to add an argument to a URL, use: ?argName=argVal e.g. &wordlength=
     """
+    
+    
     pyramid = []
-    url = f"https://us-central1-waldenpondpress.cloudfunctions.net/give_me_a_word?wordlength=20"
-    r = requests.get(url)
-    if r.status_code is 200:
-        pyramid_file = json.loads(r.text)
-
-for length in range(3, max_length + 1, 2):
-        word = get_word_of_length(length)
-        if word:
-            pyramid.append(word[:length])
-            max_length = 20
-
-        return pyramid
-
-
-
+    for i in range(3, 21, 2):
+        url = f"https://us-central1-waldenpondpress.cloudfunctions.net/give_me_a_word?wordlength={i}"
+        response_text= requests.get(url).text
+        pyramid.append(response_text)
+        
+    for j in range(20, 2, -2):
+        url = f"https://us-central1-waldenpondpress.cloudfunctions.net/give_me_a_word?wordlength={j}"
+        response_text= requests.get(url).text
+        pyramid.append(response_text)
+        
+    return pyramid
 
 
 
@@ -114,28 +113,26 @@ def pokedex(low=1, high=5):
          get very long. If you are accessing a thing often, assign it to a
          variable and then future access will be easier.
     """
-    id = 5
-    url = f"https://pokeapi.co/api/v2/pokemon/{id}"
-    r = requests.get(url)
-    if r.status_code is 200:
+    max_height = 0
+    max_id = -1
+    for id in range(low, high+1):
+      url = f"https://pokeapi.co/api/v2/pokemon/{id}"
+      r = requests.get(url)
+      if r.status_code == 200:
         the_json = json.loads(r.text)
-
-    return {"name": None, "weight": None, "height": None}
-
-for id in range(low, high + 1):
-
-name = pokemon_data["name"]
-        weight = pokemon_data["weight"]
-            height = pokemon_data["height"]
-            if height > tallest_height:
-                tallest_height = height
-                tallest_pokemon = {
-                    "name": name,
-                    "weight": weight,
-                    "height": height
-                    }
-
-    return tallest_pokemon
+      curr_height = the_json['height']
+      if curr_height > max_height:
+        max_id = id
+        max_height = curr_height
+    
+    max_url = f"https://pokeapi.co/api/v2/pokemon/{max_id}"
+    r = requests.get(max_url)
+    if r.status_code == 200:
+      the_json = json.loads(r.text)
+    name = the_json['name']
+    weight = the_json['weight']
+    height = the_json['height']
+    return {"name": name, "weight": weight, "height": height}
 
 def diarist():
     """Read gcode and find facts about it.
@@ -154,7 +151,22 @@ def diarist():
 
     NOTE: this function doesn't return anything. It has the _side effect_ of modifying the file system
     """
-    pass
+    input_file_path = f'{LOCAL}/Trispokedovetiles(laser).gcode'
+    output_file_path = f'{LOCAL}/lasers.pew'
+    try:
+        with open(input_file_path, 'r') as file:
+            content = file.read()
+    except FileNotFoundError:
+        print(f"Error: The file {input_file_path} was not found.")
+        return
+
+    # Count the occurrences of "M10 P1"
+    command = "M10 P1"
+    count = content.count(command)
+
+    # Write the count to 'lasers.pew'
+    with open(output_file_path, 'w') as file:
+        file.write(str(count))
 
 
 if __name__ == "__main__":
