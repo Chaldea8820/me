@@ -139,10 +139,8 @@ def set_it_on_fire(input_string="very naughty boy") -> str:
     TIP: make sure that you have a 🔥 on both ends of the string.
     """
 
-    return 
-upper_string = input_string.upper()
-seperated_words = list(upper_string)
-flame_words = ['🔥' + 
+    input_string = input_string.upper()
+    return '🔥' + '🔥'.join(list(input_string)) + '🔥'
 
 
 
@@ -157,7 +155,8 @@ def the_chain_gang_5(the_value) -> bool:
     TIP: you've already written a function that subtracts 5
     """
 
-    return None
+    result_after_subtracting = take_five(the_value)
+    return is_it_5(result_after_subtracting)
 
 
 def pet_filter(letter="a") -> list:
@@ -174,8 +173,7 @@ def pet_filter(letter="a") -> list:
         "fancy rat and lab rat", "mink", "red fox", "hedgehog", "guppy"
     ]
     # fmt: on
-    filtered = []
-
+    filtered = [pet for pet in pets if letter in pet]
     return filtered
 
 
