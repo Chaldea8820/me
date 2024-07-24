@@ -189,6 +189,14 @@ def best_letter_for_pets() -> str:
 
     the_alphabet = string.ascii_lowercase
     most_popular_letter = ""
+    max_count = 0
+    
+    for letter in the_alphabet:
+        filtered_pets = pet_filter(letter)
+        count = len(filtered_pets)
+        if count > max_count:
+            most_popular_letter = letter
+            max_count = count
 
     return most_popular_letter
 
@@ -220,8 +228,15 @@ def make_filler_text_dictionary() -> dict:
 
     url = "https://us-central1-waldenpondpress.cloudfunctions.net/give_me_a_word?wordlength="
     wd = {}
-
+    for length in range(3, 8):
+        words = []
+        for i in range(4):
+            response = requests.get(url + str(length))
+            if response.status_code == 200:
+                words.append(response.text)
+        wd[length] = words
     return wd
+
 
 
 def random_filler_text(number_of_words=200) -> str:
@@ -236,11 +251,14 @@ def random_filler_text(number_of_words=200) -> str:
     """
 
     my_dict = make_filler_text_dictionary()
-
     words = []
 
-    return " ".join(words)
+    for x in range(number_of_words):
+        word_length = random.randint(3, 7)
+        word = random.choice(my_dict[word_length])
+        words.append(word)
 
+    return " ".join(words)
 
 def fast_filler(number_of_words=200) -> str:
     """Makes filler text, but really fast.
@@ -259,9 +277,25 @@ def fast_filler(number_of_words=200) -> str:
     """
 
     fname = "dict_cache.json"
-
-    return None
-
+    
+    if os.path.isfile(fname):
+        with open(fname, 'r') as f:
+            my_dict = json.load(f)
+        my_dict = {int(k): v for k, v in my_dict.items()}
+    else:
+        my_dict = make_filler_text_dictionary()
+        with open(fname, 'w') as f:
+            json.dump(my_dict, f)
+    
+    words = []
+    
+    for _ in range(number_of_words):
+        word_length = random.randint(3, 7)
+        word = random.choice(my_dict[word_length])
+        words.append(word)
+    
+    paragraph = " ".join(words).capitalize() + "."
+    return paragraph
 
 if __name__ == "__main__":
     print("give_me_five", give_me_five(), type(give_me_five()))
