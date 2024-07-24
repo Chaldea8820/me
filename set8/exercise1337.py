@@ -91,7 +91,7 @@ def n_counter(search_for_this, input_list=[1, 4, 1, 5, 1, 1]) -> int:
     count = 0
     for item in input_list:
         if item == search_for_this:
-        count += 1
+            count += 1
 
     return count
 
@@ -115,8 +115,15 @@ def fizz_buzz() -> list:
          'FizzBuzz', 16, 17, ...]
     """
     fizz_buzz_list = []
-    # your code here
-
+    for num in range(1, 101):
+    if num % 3 == 0 and num % 5 == 0:
+        fizz_buzz_list.append("FizzBuzz")
+    elif num % 3 == 0:
+        fizz_buzz_list.append("Fizz")
+    elif num % 5 == 0:
+        fizz_buzz_list.append("Buzz")
+    else:
+        fizz_buzz_list.append(num)
     return fizz_buzz_list
 
 
