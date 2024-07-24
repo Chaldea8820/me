@@ -23,7 +23,7 @@ def password_please() -> str:
     """Returns a string, 8 or more characters long, contains at
     least one upper case letter and one lowercase letter.
     TIP: don't put in a real password!"""
-    return Code1161
+    return "Code1161
 
 
 def list_please() -> list[Any]:
@@ -43,18 +43,23 @@ def string_list_please() -> list[str]:
 
 def dictionary_please() -> dict:
     """Returns a dictionary, anything you like."""
-    return None
+    return {
+        "name": "Ross",
+        "age": 21,
+        "city": "Sydney",
+        "occupation": "Student"
+    }
 
 
 def is_it_5(some_number) -> bool:
     """Returns True if the argument passed is 5, otherwise returns False."""
-    well_is_it = None
+    well_is_it = some_number == 5
     return well_is_it
 
 
 def take_five(some_number) -> int:
     """Subtracts 5 from some_number."""
-    return None
+    return some_number -5
 
 
 def greet(name="Towering Timmy") -> str:
@@ -63,7 +68,7 @@ def greet(name="Towering Timmy") -> str:
     E.g. if given as "Towering Timmy" it should
          return "Well hello, Towering Timmy"
     """
-    return None
+    return f"Well hello {name}"
 
 
 def one_counter(input_list=[1, 4, 1, 5, 1, 1]) -> int:
