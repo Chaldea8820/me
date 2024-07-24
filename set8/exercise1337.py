@@ -287,6 +287,7 @@ def fast_filler(number_of_words=200) -> str:
         with open(fname, 'w') as f:
             json.dump(my_dict, f)
     
+    
     words = []
     
     for _ in range(number_of_words):
