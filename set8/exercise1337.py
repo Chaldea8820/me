@@ -76,7 +76,7 @@ def one_counter(input_list=[1, 4, 1, 5, 1, 1]) -> int:
     Return an integer.
     TIP: the test will use a different input_list, so don't just return 2
     """
-    count = []
+    count = 0
     for item in input_list:
         if item == 1:
             count += 1
