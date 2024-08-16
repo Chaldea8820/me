@@ -1,1 +1,1 @@
-TODO: Reflect on what you learned this week and what is still unclear.
+Found a senior whom actually studies code in unsw, bought him lunch and we spent sometime going over the basics of python.
